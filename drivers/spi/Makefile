@@ -1,6 +1,7 @@
 #
 # (C) Copyright 2000-2007
 # Wolfgang Denk, DENX Software Engineering, wd@denx.de.
+# Copyright (C) 2013 Renesas Solutions Corp.
 #
 # See file CREDITS for list of people who contributed to this
 # project.
@@ -49,6 +50,7 @@ COBJS-$(CONFIG_OC_TINY_SPI) += oc_tiny_spi.o
 COBJS-$(CONFIG_OMAP3_SPI) += omap3_spi.o
 COBJS-$(CONFIG_SOFT_SPI) += soft_spi.o
 COBJS-$(CONFIG_SH_SPI) += sh_spi.o
+COBJS-$(CONFIG_RZ_SPI) += rz_spi.o
 COBJS-$(CONFIG_FSL_ESPI) += fsl_espi.o
 COBJS-$(CONFIG_FDT_SPI) += fdt_spi.o
 COBJS-$(CONFIG_TEGRA20_SFLASH) += tegra20_sflash.o

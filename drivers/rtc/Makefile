@@ -1,6 +1,7 @@
 #
 # (C) Copyright 2001-2006
 # Wolfgang Denk, DENX Software Engineering, wd@denx.de.
+# Copyright (C) 2013 Renesas Solutions Corp.
 #
 # See file CREDITS for list of people who contributed to this
 # project.
@@ -71,6 +72,7 @@ COBJS-$(CONFIG_RTC_RX8025) += rx8025.o
 COBJS-$(CONFIG_RTC_S3C24X0) += s3c24x0_rtc.o
 COBJS-$(CONFIG_RTC_S3C44B0) += s3c44b0_rtc.o
 COBJS-$(CONFIG_RTC_X1205) += x1205.o
+COBJS-$(CONFIG_RTC_RZA1) += rza1_rtc.o
 
 COBJS	:= $(sort $(COBJS-y))
 SRCS	:= $(COBJS:.o=.c)

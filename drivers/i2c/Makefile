@@ -1,6 +1,7 @@
 #
 # (C) Copyright 2000-2007
 # Wolfgang Denk, DENX Software Engineering, wd@denx.de.
+# Copyright (C) 2013 Renesas Solutions Corp.
 #
 # See file CREDITS for list of people who contributed to this
 # project.
@@ -46,6 +47,7 @@ COBJS-$(CONFIG_TSI108_I2C) += tsi108_i2c.o
 COBJS-$(CONFIG_U8500_I2C) += u8500_i2c.o
 COBJS-$(CONFIG_SH_I2C) += sh_i2c.o
 COBJS-$(CONFIG_SH_SH7734_I2C) += sh_sh7734_i2c.o
+COBJS-$(CONFIG_SH_RIIC) += sh_riic.o
 
 COBJS	:= $(COBJS-y)
 SRCS	:= $(COBJS:.o=.c)
