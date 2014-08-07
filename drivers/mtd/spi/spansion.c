@@ -192,18 +192,17 @@ static int spansion_wait_ready(struct spi_flash *flash, unsigned long timeout)
 static int spansion_read_fast(struct spi_flash *flash,
 			     u32 offset, size_t len, void *buf)
 {
+#if !defined(ENABLE_32BIT_ADDRESS)
 	struct spansion_spi_flash *spsn = to_spansion_spi_flash(flash);
 	unsigned long page_addr;
 	unsigned long page_size;
+#endif
 	u8 cmd[5];
 
 	/* Handle memory-mapped SPI */
 	if (flash->memory_map)
 		memcpy(buf, flash->memory_map + offset, len);
 	
-	page_size = spsn->params->page_size;
-	page_addr = offset / page_size;
-
 	cmd[0] = CMD_S25FLXX_FAST_READ;
 #if defined(ENABLE_32BIT_ADDRESS)
 	cmd[1] = (offset >> 24) & 0xff;
@@ -211,6 +210,9 @@ static int spansion_read_fast(struct spi_flash *flash,
 	cmd[3] = (offset >>  8) & 0xff;
 	cmd[4] = (offset >>  0) & 0xff;
 #else
+	page_size = spsn->params->page_size;
+	page_addr = offset / page_size;
+
 	cmd[1] = page_addr >> 8;
 	cmd[2] = page_addr;
 	cmd[3] = offset % page_size;
