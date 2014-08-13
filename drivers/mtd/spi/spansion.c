@@ -245,6 +245,11 @@ static int spansion_write(struct spi_flash *flash,
 	page_addr = offset / page_size;
 	byte_addr = offset % page_size;
 
+	/* If Dual Flash chips (flagged with cs=1), you program twice
+	   as much data at once. */
+	if( flash->spi->cs == 1)
+		page_size *= 2;
+
 	ret = spi_claim_bus(flash->spi);
 	if (ret) {
 		debug("SF: Unable to claim SPI bus\n");
@@ -261,6 +266,10 @@ static int spansion_write(struct spi_flash *flash,
 		cmd[0] = CMD_S25FLXX_PP;
 #if defined(ENABLE_32BIT_ADDRESS)
 		u32WriteAddr = offset + actual;
+		/* If Dual Flash chips (flagged with cs=1), you send 2 bytes
+		   for each 1 address, so adjust address each time */
+		if( flash->spi->cs == 1)
+			u32WriteAddr = offset + actual/2;
 		cmd[1] = (u32WriteAddr >> 24) & 0xff;
 		cmd[2] = (u32WriteAddr >> 16) & 0xff;
 		cmd[3] = (u32WriteAddr >>  8) & 0xff;
