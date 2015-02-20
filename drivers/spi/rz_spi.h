@@ -232,7 +232,7 @@ struct stRzSpi{
 #define	SMDRENR_OPDRE		(1u << 4)
 #define	SMDRENR_SPIDRE		(1u << 0)
 
-#define	QSPI_BASE_CLK		(133333333)
+#define	QSPI_BASE_CLK		(CONFIG_SYS_CLK_FREQ < 1)
 
 /*
  *  FlashROM Chip Commands
