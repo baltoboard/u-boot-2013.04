@@ -84,16 +84,7 @@
 	"s_boot=run s0 s1 s2 s3 qd; set bootargs ${baseargs} root=${sdev} panel=${panel}; fdt chosen; bootm go\0" \
 	"x0=echo Booting Linux to Internal RAM...\0" \
 	"x1=sf probe 0; sf read 20500000 C0000 1000; fdt addr 20500000\0" \
-	"x2=" \
-		"if test ${panel} = 1; then " \
-			"echo Reserving 1.5 MB for framebuffer...; fdt memory 0x20000000 0x00880000; " \
-		"else " \
-			"if test ${panel} = 0; then " \
-				"echo Reserving 1 MB for framebuffer...; fdt memory 0x20000000 0x00900000; " \
-			"else " \
-				"echo Reserving 0 MB for framebuffer...; fdt memory 0x20000000 0x00A00000; " \
-			"fi; " \
-		"fi;\0" \
+	"x2=fdt memory 0x20000000 0x00A00000\0" \
 	"x_boot=run x0 x1 x2 qd; set bootargs ${baseargs} root=${xdev} panel=${panel}; fdt chosen; bootx 18200000 20500000\0"
 
 /*#define CONFIG_BOOTCOMMAND "run s_boot"*/
